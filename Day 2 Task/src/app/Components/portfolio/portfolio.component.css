@@ -1,0 +1,29 @@
+
+h1 {
+  text-shadow: 5px 2px rgb(190, 190, 190);
+  letter-spacing: 2px;
+}
+
+.bg-card1{
+  background-color: rgb(190, 187, 187);
+}
+.bg-card2{
+  background-color: rgb(61, 58, 58);
+}
+
+.underline:after { /* this is the border */
+    content:"";
+    display:block;
+    width: 6em;
+    max-width:70%;
+    border-bottom: 0.15em solid white;
+    margin: .1em auto 0;
+}
+
+  .h-card{
+    height: 180px;
+    width: 300px;
+  }
+.al {
+position: relative;
+}
