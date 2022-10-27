@@ -1,0 +1,62 @@
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { InterProduct } from '../../Interfaces/inter-product';
+import { InterCategory } from 'src/app/Interfaces/inter-category';
+import { USDtoEGPPipe } from 'src/app/Pipes/usdto-egp.pipe';
+import { ProductsServiceService } from '../../Services/products-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { APIProductsService } from '../../Services/apiproducts.service';
+
+@Component({
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css'],
+})
+export class ProductsComponent implements OnInit, OnChanges {
+  @Input() selectCatID: number = 0;
+  @Output() totalPriceChanged: EventEmitter<number>;
+
+  totalPrice: number = 0;
+  showDate: Date;
+  prdFilterCat: InterProduct[] = [];
+
+  constructor(
+    private productServ: ProductsServiceService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private apiservice: APIProductsService
+  ) {
+    this.totalPriceChanged = new EventEmitter<number>();
+
+    this.showDate = new Date();
+  }
+
+  ngOnInit(): void {
+    // this.prdFilterCat = this.productServ.getAllProducts();
+    this.apiservice.getAllProducts().subscribe((prd) => {
+      this.prdFilterCat = prd;
+    });
+  }
+
+  ngOnChanges(): void {
+    // this.prdFilterCat = this.productServ.getProductsByCat(this.selectCatID);
+    this.apiservice.getProductByCat(this.selectCatID).subscribe((prd) => {
+      this.prdFilterCat = prd;
+    });
+  }
+
+  addToCart(proPrice: number, count: string) {
+    this.totalPrice += proPrice * +count;
+    this.totalPriceChanged.emit(this.totalPrice);
+  }
+
+  // prodDetails(pid: any) {
+  //   this.router.navigate(['products', pid]);
+  // }
+}

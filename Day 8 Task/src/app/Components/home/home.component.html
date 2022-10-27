@@ -1,0 +1,56 @@
+<div class="pt-3 text-center">
+  <button [disabled]="isUserLogged" class="btn btn-primary" (click)="login()">
+    Login </button>
+  <button [disabled]="!isUserLogged" class="btn btn-danger" (click)="logout()">
+    Logout </button>
+</div>
+<img src="../../../assets/logo.jpg" height="559px" alt="">
+
+
+<aside infinite-scroll (scrolled)="onScroll()" class="row center-screen">
+  <div class="card col-3 d-inline p-0" style="width: 18rem;" *ngFor="let
+    product of products">
+    <img BorderBox="lightgray" hoverColor="darkgray" [src]="product.imageURL"
+      width="100%" height="150px" class="img-thumbnail mx-auto d-block
+      imgCard ">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text"><b>Some Of Details</b> example text to build on the
+        card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item align-middle text-center"><b>Device Code:
+        </b>{{product.id}}</li>
+      <li class="list-group-item align-middle text-center d-none"><b>Category
+          ID: </b>{{product.CategoryID}}</li>
+      <li class="list-group-item align-middle text-center"><b>Device Brand:
+        </b>{{product.name}}</li>
+      <li class="list-group-item align-middle text-center d-inline"
+        [ngSwitch]="product.quantity">
+        <div class="bg-danger fw-bold d-inline p-2" *ngSwitchCase="0">Out Of
+          Stock</div>
+        <div class="bg-warning fw-bold d-inline p-2" *ngSwitchCase="1">Last
+          Item</div>
+        <div class="bg-info fw-bold d-inline p-2" *ngSwitchCase="2">Last 2
+          Items</div>
+        <div class="d-inline" *ngSwitchCase="product.quantity"><b> Quantity:
+          </b>{{product.quantity}}</div>
+      </li>
+      <li class="list-group-item align-middle text-center"><b> Price in EGP:
+        </b>{{product.price | currency: "EGP "}}</li>
+      <li class="list-group-item align-middle text-center"><b> Price in USD:
+        </b>{{product.price | uSDtoEGP | currency}}</li>
+      <li class="list-group-item align-middle text-center">
+        <a class="btn btn-success" [routerLink]="['/products', product.id]">Details</a>
+      </li>
+      <li class="list-group-item align-middle center-screen">
+        <input #itemCount type="number" class="form-control inputWidth"
+          min="0">
+      </li>
+      <li class="list-group-item align-middle text-center">
+        <button class="btn btn-dark" (click)="addToCart(product.price,
+          itemCount.value)">Add to Cart</button>
+      </li>
+    </ul>
+  </div>
+</aside>

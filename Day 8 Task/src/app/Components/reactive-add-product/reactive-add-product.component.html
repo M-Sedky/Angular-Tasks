@@ -1,0 +1,34 @@
+<form [formGroup]="addProduct" (ngSubmit)="addProductRe()" class="w-50 center
+  col-sm-xx pt-5 pb-5">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <!-- {{formControl['name'].errors | json}} -->
+    <div *ngIf="formControl['name'].touched && !formControl['name'].valid">
+      <p class="text-danger" *ngIf="formControl['name'].errors?.['required']">Name
+        is Required!</p>
+      <p class="text-danger" *ngIf="formControl['name'].errors?.['minlength']">Name
+        is too short at least 4 characters!</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" formControlName="price">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Quantity</label>
+    <input type="number" class="form-control" formControlName="quantity">
+  </div>
+  <div class="center-screen p-4">
+    <label class="form-label">Select Category</label>
+    <select class="form-select mb-3 btn-secondary" formControlName="CategoryID">
+      <option value="0">All Categories</option>
+      <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Product Image</label>
+    <input type="file" class="form-control" formControlName="imageURL">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
