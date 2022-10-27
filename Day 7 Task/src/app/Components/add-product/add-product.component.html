@@ -1,0 +1,43 @@
+<!-- <div class="pt-5 pb-5  text-center">
+  <button class="btn btn-success" (click)="addProduct()">Add Product</button>
+</div> -->
+
+<form #prdForm="ngForm" (ngSubmit)="addProduct()" class="w-50 center col-sm-xx pt-5 pb-5">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name"
+      [(ngModel)]="newPrd.name" #inpName="ngModel" required
+      pattern="[A-Za-z]{3,}">
+    <div [hidden]="inpName.valid || inpName.untouched">
+      <p class="text-danger" *ngIf="inpName.errors?.['required']">Name is Required!</p>
+      <p class="text-danger" *ngIf="inpName.errors?.['pattern']">Name is too short at least 3 characters!</p>
+    </div>
+
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" name="price"
+      [(ngModel)]="newPrd.price">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Quantity</label>
+    <input type="number" class="form-control" name="quantity"
+      [(ngModel)]="newPrd.quantity">
+  </div>
+  <div class="center-screen p-4">
+    <label class="form-label">Select Category</label>
+    <select class="form-select mb-3 btn-secondary" name="category"
+      [(ngModel)]="newPrd.CategoryID">
+      <option value="0">All Categories</option>
+      <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Product Image</label>
+    <input type="file" class="form-control" name="image"
+      [(ngModel)]="newPrd.imageURL">
+  </div>
+
+
+  <button [disabled]="prdForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>
