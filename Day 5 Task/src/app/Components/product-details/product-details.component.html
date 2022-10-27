@@ -1,0 +1,18 @@
+<div class="pt-5 pb-5 d-flex justify-content-center">
+  <div class="card text-center" style="width: 40rem;">
+    <img [src]="prdDetails?.imageURL" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title fw-bold fs-1">{{prdDetails?.name}}</h5>
+
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Price: {{prdDetails?.price}}</li>
+      <li class="list-group-item">
+        <p class="card-text"><b>Some Of Details</b> example text to build on the
+          card title and make up the bulk of the card's content.</p></li>
+    </ul>
+    <div class="card-body">
+      <button class="btn btn-primary" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</div>

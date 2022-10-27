@@ -1,0 +1,57 @@
+<div class="w-25 pt-5 d-block ">
+  <p class="fs-6 bg-warning d-inline p-2 m-3 ">Date Now: {{showDate |
+    date:'longDate'}}</p>
+</div>
+
+
+<div class="container-fluid pt-4">
+  <div class="row center-screen">
+
+    <div class="card col-3 d-inline m-4 p-0" *ngFor="let prd of prdFilterCat">
+      <img BorderBox="lightgray" hoverColor="darkgray" [src]="prd.imageURL"
+        width="100%" height="150px" class="img-thumbnail mx-auto d-block
+        imgCard">
+      <div class="card-body">
+        <h5 class="card-title text-center fw-bold fs-1">{{prd.name}}</h5>
+        <p class="card-text"><b>Some Of Details</b> example text to build on the
+          card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item align-middle text-center"><b>Device Code:
+          </b>{{prd.id}}</li>
+        <li class="list-group-item align-middle text-center d-none"><b>Category
+            ID: </b>{{prd.CategoryID}}</li>
+        <li class="list-group-item align-middle text-center"><b>Device Brand:
+          </b>{{prd.name}}</li>
+        <li class="list-group-item align-middle text-center d-inline"
+          [ngSwitch]="prd.quantity">
+          <div class="bg-danger fw-bold d-inline p-2" *ngSwitchCase="0">Out Of
+            Stock</div>
+          <div class="bg-warning fw-bold d-inline p-2" *ngSwitchCase="1">Last
+            Item</div>
+          <div class="bg-info fw-bold d-inline p-2" *ngSwitchCase="2">Last 2
+            Items</div>
+          <div class="d-inline" *ngSwitchCase="prd.quantity"><b> Quantity: </b>{{prd.quantity}}</div>
+        </li>
+        <li class="list-group-item align-middle text-center"><b> Price in EGP:
+          </b>{{prd.price | currency: "EGP "}}</li>
+        <li class="list-group-item align-middle text-center"><b> Price in USD:
+          </b>{{prd.price | uSDtoEGP | currency}}</li>
+        <!-- <li class="list-group-item align-middle text-center">
+          <button class="btn btn-success" (click)="prodDetails(prd.id)">Details</button>
+        </li> -->
+        <li class="list-group-item align-middle text-center">
+          <a class="btn btn-success" [routerLink]="['/products', prd.id]">Details</a>
+        </li>
+        <li class="list-group-item align-middle center-screen">
+          <input #itemCount type="number" class="form-control inputWidth"
+            min="0">
+        </li>
+        <li class="list-group-item align-middle text-center">
+          <button class="btn btn-dark" (click)="addToCart(prd.price,
+            itemCount.value)">Add to Cart</button>
+        </li>
+      </ul>
+    </div><hr>
+  </div>
+</div>
