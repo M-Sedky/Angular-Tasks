@@ -1,0 +1,96 @@
+<div class="align-items-center center-screen p-4">
+  <select class="form-select mb-3 w-50 btn-secondary" aria-label="Default select example" [(ngModel)] ="selectedCatID">
+    <option *ngFor="let cat of catList" [value]="cat.catID">{{cat.name}}</option>
+  </select>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr class="fs-3 fw-bold text-center">
+      <td>Image</td>
+      <td>ID</td>
+      <!-- <td>category</td> -->
+      <td>Name</td>
+      <td>Quantity</td>
+      <td>Price</td>
+      <td>Count</td>
+      <td>Buy Now!</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [class.d-none] = "selectedCatID != items.CategoryID"
+        *ngFor="let items of prdList" >
+      <td>
+        <img [src]="items.imageURL" height="80px" width="150px" class="img-thumbnail mx-auto d-block imgTable">
+      </td>
+      <td class="align-middle text-center">{{items.id}}</td>
+      <td class="align-middle text-center d-none">{{items.CategoryID}}</td>
+      <td class="align-middle text-center">{{items.name}}</td>
+      <!-- <td class="align-middle text-center">{{items.quantity}}</td> -->
+
+      <td class="align-middle text-center" [ngSwitch]="items.quantity">
+      <div class="bg-danger fw-bold" *ngSwitchCase="0">Out Of Stock</div>
+      <div class="bg-warning fw-bold" *ngSwitchCase="1">Last Item</div>
+      <div class="bg-info fw-bold" *ngSwitchCase="2">Last 2 Items</div>
+      <div *ngSwitchCase="items.quantity">Available: {{items.quantity}}</div>
+    </td>
+      <td class="align-middle text-center">{{items.price}}</td>
+      <!-- Template Variable -->
+      <td class="center-screenIn">
+        <input #itemCount type="number" class="form-control inputWidth">
+      </td>
+      <td class="align-middle text-center"><button class="btn btn-dark" (click)="addToCart(items.price, itemCount.value)">Add to Cart</button></td>
+    </tr>
+  </tbody>
+</table>
+<div class="center-screen">
+  <p class="fw-bold border border-success brd border-2 rounded-pill text-center  text-dark fs-4 p-3 w-50" > The Total Price = {{totalPrice}}</p>
+</div>
+
+
+<div class="bg-dark w-100 p-5">space</div>
+
+
+
+
+<!-- Card Way -->
+<div class="align-items-center center-screen p-4">
+  <select class="form-select mb-3 w-50 btn-secondary" aria-label="Default select example" [(ngModel)] ="selectedCatID">
+    <option *ngFor="let cat of catList" [value]="cat.catID">{{cat.name}}</option>
+  </select>
+</div>
+<div class="container-fluid ">
+  <div class="row center-screen">
+
+    <div class="card col-3 d-inline m-4" [class.d-none] = "selectedCatID != items.CategoryID" *ngFor="let items of prdList">
+      <img src="..." [src]="items.imageURL" width="100%" height="150px" class="img-thumbnail mx-auto d-block imgCard">
+      <div class="card-body">
+        <h5 class="card-title text-center fw-bold fs-3">{{items.name}}</h5>
+        <p class="card-text"><b>Some Of Details</b> example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item align-middle text-center"><b>Device Code: </b>{{items.id}}</li>
+        <li class="list-group-item align-middle text-center d-none"><b>Category ID: </b>{{items.CategoryID}}</li>
+        <li class="list-group-item align-middle text-center"><b>Device Brand: </b>{{items.name}}</li>
+        <li class="list-group-item align-middle text-center d-inline" [ngSwitch]="items.quantity">
+          <div class="bg-danger fw-bold d-inline" *ngSwitchCase="0">Out Of Stock</div>
+          <div class="bg-warning fw-bold d-inline" *ngSwitchCase="1">Last Item</div>
+          <div class="bg-info fw-bold d-inline" *ngSwitchCase="2">Last 2 Items</div>
+          <div class="d-inline" *ngSwitchCase="items.quantity"><b> Quantity: </b>{{items.quantity}}</div>
+        </li>
+        <li class="list-group-item align-middle text-center"><b> Prcie: </b>{{items.price}}</li>
+        <li class="list-group-item align-middle center-screen" >
+          <input #itemCount type="number" class="form-control inputWidth">
+        </li>
+        <li class="list-group-item align-middle text-center">
+          <button class="btn btn-dark" (click)="addToCart(items.price, itemCount.value)">Add to Cart</button>
+        </li>
+      </ul>
+    </div>
+    <p class="fw-bold border border-success brd border-2 rounded-pill text-center  text-dark fs-4 p-3 w-50" > The Total Price = {{totalPrice}}</p>
+  </div>
+</div>
+
+
+

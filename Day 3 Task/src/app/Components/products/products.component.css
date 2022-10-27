@@ -1,0 +1,28 @@
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.imgCard{
+  height: 200px !important;
+}
+
+
+.imgTable{
+  height: 120px !important;
+}
+
+.inputWidth{
+  width: 80px !important;
+
+}
+
+.center-screenIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 23vh;
+}
