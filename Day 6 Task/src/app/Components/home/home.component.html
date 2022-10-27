@@ -1,0 +1,5 @@
+<app-products></app-products>
+
+
+<button [disabled]="isUserLogged" class="btn btn-primary" (click)="login()"> Login </button>
+<button [disabled]="!isUserLogged" class="btn btn-danger" (click)="logout()"> Logout </button>
